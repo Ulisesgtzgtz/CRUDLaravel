@@ -22,7 +22,7 @@
         <!-- <caption>Lista de Productos</caption> -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">ID</th>
+                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col">Status</th>
@@ -34,7 +34,7 @@
             @foreach ($productos as $producto)
     
             <tr>
-                <td class="text-center">{{$producto->id}}</td>
+                <td>{{$producto->id}}</td>
                 <td>{{$producto->name}}</td>
                 <td>{{$producto->price}}</td>
                 <td>
@@ -46,10 +46,12 @@
                 </td>
                 <td>{{$producto->stock}}</td>
                 <td>
-                    <a href="/productos/{{$producto->id}}/edit" class="btn btn-secondary">Actualizar</a>
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger">Eliminar</button>
+                    <form action="{{ route('productos.destroy', $producto->id)}}" method="POST">
+                        <a href="/productos/{{$producto->id}}/edit" class="btn btn-secondary">Actualizar</a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             
